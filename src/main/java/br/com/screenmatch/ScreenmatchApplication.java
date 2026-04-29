@@ -15,6 +15,10 @@ public class ScreenmatchApplication implements CommandLineRunner {
 	@Override
 	public void run(String... args) throws Exception {
 		String apiKey = System.getenv("OMDB_API_KEY");
+		if (apiKey == null) {
+			throw new RuntimeException("API key não configurada");
+		}
+
 		String endereco = "http://www.omdbapi.com/?t=the+office&apikey=" + apiKey;
 
 		var consumoApi = new ConsumoApi();
