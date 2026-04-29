@@ -1,5 +1,6 @@
 package br.com.screenmatch;
 
+import br.com.screenmatch.service.ConsumoApi;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -13,6 +14,11 @@ public class ScreenmatchApplication implements CommandLineRunner {
 
 	@Override
 	public void run(String... args) throws Exception {
-		System.out.println("Primeiro projeto Spring sem Web!");
+		String apiKey = System.getenv("OMDB_API_KEY");
+		String endereco = "http://www.omdbapi.com/?t=the+office&apikey=" + apiKey;
+
+		var consumoApi = new ConsumoApi();
+		var json = consumoApi.obterDados(endereco);
+		System.out.println(json);
 	}
 }
