@@ -1,5 +1,6 @@
 package br.com.screenmatch;
 
+import br.com.screenmatch.model.DadosEpisodio;
 import br.com.screenmatch.model.DadosSerie;
 import br.com.screenmatch.service.ConsumoApi;
 import br.com.screenmatch.service.ConverteDados;
@@ -21,14 +22,19 @@ public class ScreenmatchApplication implements CommandLineRunner {
 			throw new RuntimeException("API key não configurada");
 		}
 
-		String endereco = "http://www.omdbapi.com/?t=the+office&apikey=" + apiKey;
+		String enderecoSerie = "http://www.omdbapi.com/?t=the+office&apikey=" + apiKey;
+		String enderecoEpisodio = "http://www.omdbapi.com/?t=the+office&season=1&episode=2&apikey=" + apiKey;
 
 		var consumoApi = new ConsumoApi();
-		var json = consumoApi.obterDados(endereco);
+		var json = consumoApi.obterDados(enderecoSerie);
 		System.out.println(json);
 
 		ConverteDados conversor = new ConverteDados();
 		DadosSerie dados = conversor.obterdados(json, DadosSerie.class);
 		System.out.println(dados);
+
+		json = consumoApi.obterDados(enderecoEpisodio);
+		DadosEpisodio dadosEpisodio = conversor.obterdados(json, DadosEpisodio.class);
+		System.out.println(dadosEpisodio);
 	}
 }
