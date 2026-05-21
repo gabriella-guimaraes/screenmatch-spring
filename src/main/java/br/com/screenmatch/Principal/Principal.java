@@ -7,7 +7,6 @@ import br.com.screenmatch.model.Episodio;
 import br.com.screenmatch.service.ConsumoApi;
 import br.com.screenmatch.service.ConverteDados;
 
-import java.time.DateTimeException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.*;
@@ -56,11 +55,16 @@ public class Principal {
                 .flatMap(t -> t.episodios().stream())
                 .collect(Collectors.toList());
 
-        System.out.println("\nTop 5 episódios: ");
+        System.out.println("\nTop 10 episódios: ");
         dadosEpisodios.stream()
                 .filter(e -> !e.avaliacao().equalsIgnoreCase("N/A"))
+                .peek(e -> System.out.println("primeiro filtro(N/A) " + e))
                 .sorted(Comparator.comparing(DadosEpisodio::avaliacao).reversed())
-                .limit(5)
+                .peek(e -> System.out.println("ordenação " + e))
+                .limit(10)
+                .peek(e -> System.out.println("limite " + e))
+                .map(e -> e.titulo().toUpperCase())
+                .peek(e -> System.out.println("mapeamento " + e))
                 .forEach(System.out::println);
 
         List<Episodio> episodios = temporadas.stream()
