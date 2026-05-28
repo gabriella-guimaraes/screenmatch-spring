@@ -5,6 +5,8 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
+import java.util.Scanner;
+
 @SpringBootApplication
 public class ScreenmatchApplication implements CommandLineRunner {
 
@@ -14,8 +16,29 @@ public class ScreenmatchApplication implements CommandLineRunner {
 
 	@Override
 	public void run(String... args) throws Exception {
-		Principal principal = new Principal();
-		principal.exibeMenu();
+		Scanner scanner = new Scanner(System.in);
+
+		var menu = """
+            \n*** SELECIONE O PROJETO ***
+            1 - ScreenMatch (projeto do curso)
+            2 - Tabela FIPE (desafio)
+            """;
+
+		System.out.println(menu);
+		var opcao = scanner.nextLine();
+
+		switch (opcao) {
+			case "1" -> {
+				br.com.screenmatch.Principal.Principal principal = new br.com.screenmatch.Principal.Principal();
+				principal.exibeMenu();
+			}
+			case "2" -> {
+				br.com.screenmatch.Desafios.tabelaFipe.principal.Principal desafio =
+						new br.com.screenmatch.Desafios.tabelaFipe.principal.Principal();
+				desafio.exibeMenu();
+			}
+			default -> System.out.println("Opção inválida.");
+		}
 
 	}
 }
