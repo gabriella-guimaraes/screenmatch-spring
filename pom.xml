@@ -48,6 +48,14 @@
 			<version>3.1.2</version>
 			<scope>compile</scope>
 		</dependency>
+
+		<!-- Source: https://mvnrepository.com/artifact/com.theokanning.openai-gpt3-java/service -->
+		<dependency>
+			<groupId>com.theokanning.openai-gpt3-java</groupId>
+			<artifactId>service</artifactId>
+			<version>0.18.2</version>
+			<scope>compile</scope>
+		</dependency>
 	</dependencies>
 
 	<build>
