@@ -1,14 +1,15 @@
 package br.com.screenmatch.service.traducao;
 
 import br.com.screenmatch.service.ConsumoApi;
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
+
+import tools.jackson.core.JacksonException;
+import tools.jackson.databind.ObjectMapper;
 
 import java.net.URLEncoder;
 
 public class ConsultaMyMemory {
     public static String obterTraducao(String text) {
-        ObjectMapper mapper = new ObjectMapper();
+        tools.jackson.databind.ObjectMapper mapper = new ObjectMapper();
         ConsumoApi consumo = new ConsumoApi();
 
         String texto = URLEncoder.encode(text);
@@ -22,7 +23,7 @@ public class ConsultaMyMemory {
         DadosTraducao traducao;
         try {
             traducao = mapper.readValue(json, DadosTraducao.class);
-        } catch (JsonProcessingException e) {
+        } catch (JacksonException e) {
             throw new RuntimeException(e);
         }
 
