@@ -1,6 +1,8 @@
 package br.com.screenmatch;
 
 import br.com.screenmatch.Principal.Principal;
+import br.com.screenmatch.repository.SerieRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -9,6 +11,10 @@ import java.util.Scanner;
 
 @SpringBootApplication
 public class ScreenmatchApplication implements CommandLineRunner {
+
+	//Injeção de Dependência
+	@Autowired
+	private SerieRepository repository;
 
 	public static void main(String[] args) {
 		SpringApplication.run(ScreenmatchApplication.class, args);
@@ -29,7 +35,7 @@ public class ScreenmatchApplication implements CommandLineRunner {
 
 		switch (opcao) {
 			case "1" -> {
-				br.com.screenmatch.Principal.Principal principal = new br.com.screenmatch.Principal.Principal();
+				br.com.screenmatch.Principal.Principal principal = new br.com.screenmatch.Principal.Principal(repository);
 				principal.exibeMenu();
 			}
 			case "2" -> {
